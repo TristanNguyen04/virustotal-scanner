@@ -78,8 +78,16 @@ virustotal-scanner/
 ```
 
 ## Troubleshooting
+- **API Key Issues**:  If you get a "missing API key" error, make sure the `.env` file contains the correct VirusTotal API key.
+- **Go Errors**: If you get errors related to Go, ensure you have Go properly installed and that your environment is correctly set up for Go development. Use `go version` to check your Go installation.
 
+## Additional Notes
+- **Free Tier Limits**:  VirusTotal's free tier has limitations. You can only make a limited number of requests per minute (4 requests per minute). The backend implements a rate-limiting feature to handle this limitation by waiting 15 seconds between requests.
+- **File Size**: VirusTotal has a file size limit of 32 MB for the free tier. Make sure the files you are uploading are under this size limit.
+- **Frontend Updates**: The frontend will show you a loading spinner while the scan is in progress. Once the analysis is complete, you’ll see detailed results, including detection statistics and detection details.
 
+## Acknowledgement
+This project was completed as part of the cloudsineAI WebTest Take-Home Assignment.
 
 
 
