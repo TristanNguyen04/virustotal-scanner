@@ -33,14 +33,13 @@ cd virustotal-scanner
 ```
 
 ### 2. Install Go dependencies
-Navigate to the `backend` directory and run the following command to install the necessary Go dependencies:
+Run the following command to install the necessary Go dependencies:
 ```bash
-cd backend
 go mod tidy
 ```
 
 ### 3. Create `.env` file
-Create a `.env` file in the `backend` folder and add your VirusTotal API key like this:
+Create a `.env` file in the folder and add your VirusTotal API key like this:
 ```text
 VIRUSTOTAL_API_KEY="your_VirusTotal_API"
 ```
@@ -65,9 +64,8 @@ You can drag and drop a file into the "Drop Zone" or browse files to upload. The
 ## Project Structure
 ```
 virustotal-scanner/
-├── backend/                   # Backend (Go) logic
-│   ├── main.go                # The main Go file for the server
-│   ├── .env                   # Environment variables (for storing your API key)
+├── main.go                # The main Go file for the server
+├── .env                   # Environment variables (for storing your API key)
 ├── frontend/                  # Frontend (HTML, CSS, JS) files
 │   ├── index.html             # Main HTML interface
 │   ├── styles.css             # Styling for the UI
