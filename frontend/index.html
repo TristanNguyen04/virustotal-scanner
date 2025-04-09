@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VirusTotal File Scanner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ VirusTotal File Scanner</h1>
+            <p>Upload files to check for malware with VirusTotal's detection engines</p>
+        </header>
+
+        <div class="upload-container">
+            <div class="upload-box" id="dropZone">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                <h3>Drag & Drop Files Here</h3>
+                <p>or</p>
+                <input type="file" id="fileInput" class="file-input">
+                <label for="fileInput" class="browse-btn">Browse Files</label>
+                <div class="file-info" id="fileInfo"></div>
+            </div>
+            <button id="scanBtn" class="scan-btn" disabled>Scan File</button>
+        </div>
+
+        <div class="results-container" id="resultsContainer">
+            <div class="loading" id="loadingIndicator">
+                <div class="spinner"></div>
+                <p>Scanning file...</p>
+            </div>
+            <div class="results" id="results"></div>
+        </div>
+
+        <footer>
+            <p>Using VirusTotal API v3 | Max file size: 32MB (Free Tier)</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
