@@ -37,9 +37,8 @@ func main() {
 	// Serve static files (frontend)
 	r.Static("/", "../frontend")
 
-	api := r.Group("/api")
 	// File upload endpoint
-	api.POST("/upload", func(c *gin.Context) {
+	r.POST("/upload", func(c *gin.Context) {
 		// Get uploaded file
 		file, err := c.FormFile("file")
 		if err != nil {
@@ -79,7 +78,7 @@ func main() {
 
 	// Start server
 	fmt.Println("Server running on http://localhost:8080")
-	r.Run(":8080")
+	r.Run("0.0.0.0:8080")
 }
 
 func uploadFileToVT(filePath string, apiKey string) (string, error) {

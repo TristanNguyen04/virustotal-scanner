@@ -10,9 +10,9 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Copy files to EC2
+    - name: Copy files to EC2 and restart app
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -20,12 +20,6 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         source: "."
         target: "~/virustotal-scanner"
-        overwrite: true
-        exclude : |
-          .git/
-          .guthub/
-          *.md
-          .gitignore
 
     - name: SSH and deploy
       uses: appleboy/ssh-action@master
@@ -34,24 +28,14 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          # Ensure Docker is running
-          sudo systemctl start docker
+          # Make sure Docker is running
+          sudo service docker start
           
-          # Navigate to project directory
+          # Move to the project directory and restart the app
           cd ~/virustotal-scanner
           
-          # Create required directories
-          mkdir -p frontend/uploads
-          chmod 755 frontend/uploads
+          # Stop and remove the existing containers, if any
+          docker-compose down
           
-          # Stop and remove existing containers
-          docker-compose down || true
-          
-          # Pull latest images and rebuild
+          # Rebuild and restart containers in detached mode
           docker-compose up --build -d
-          
-          # Verify containers are running
-          docker ps
-          
-          # Verify Nginx configuration
-          docker exec -it virustotal-scanner_nginx_1 nginx -t

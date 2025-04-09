@@ -16,7 +16,7 @@ FROM alpine:latest
 WORKDIR /root/
 
 COPY --from=builder /app/main .
-COPY ./frontend ./frontend
+COPY --from=builder /app/frontend ./frontend
 
 # Make sure the uploads directory exists
 RUN mkdir -p ./frontend/uploads
