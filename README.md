@@ -140,18 +140,18 @@ kill <PID>
 - 🚧 *Future Idea*: Implement user authentication and scan history
 - 🚧 *Future Idea*: Add virus name highlights and color-coded severity scores
 
-## Evaluation Criteria Mapping
+## ✅ Evaluation Criteria Mapping
 - **Functionality**: Fully working file scan, real-time results, VirusTotal integration
 - **Code Quality**: Modular backend, separate frontend, `.env` config, reusable functions
 - **Problem-Solving**:	Solved issues with `.env`, rate limits, server persistence
 - **Creativity**:	Added drag-and-drop, live polling, EC2 deployment
 - **Presentation**:	Polished UI, detailed logs, well-documented README
 
-## Additional Notes
+## 📝 Additional Notes
 - **Free Tier Limits**:  VirusTotal's free tier has limitations. You can only make a limited number of requests per minute (4 requests per minute). The backend implements a rate-limiting feature to handle this limitation by waiting 15 seconds between requests.
 - **File Size**: VirusTotal has a file size limit of 32 MB for the free tier. Make sure the files you are uploading are under this size limit.
 - **Frontend Updates**: The frontend will show you a loading spinner while the scan is in progress. Once the analysis is complete, you’ll see detailed results, including detection statistics and detection details.
 
-## Acknowledgement
+## 📎 Acknowledgement
 This project was completed as part of the **CloudsineAI WebTest Take-Home Assignment**.
 Thanks to the VirusTotal team for their comprehensive and free malware scanning API.
