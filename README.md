@@ -28,7 +28,7 @@ Before you can run this application, you need to do the following:
 First, clone the repository to your local machine.
 
 ```bash
-git clone <your-repository-url>
+git clone [<your-repository-url>](https://github.com/TristanNguyen04/virustotal-scanner/tree/local)
 cd virustotal-scanner
 ```
 
