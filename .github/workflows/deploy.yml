@@ -28,6 +28,14 @@ jobs:
         username: ${{ secrets.EC2_USER }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
+          # Make sure Docker is running
+          sudo service docker start
+          
+          # Move to the project directory and restart the app
           cd ~/virustotal-scanner
-          docker compose -f docker-compose.yml down
-          docker compose -f docker-compose.yml up --build -d
+          
+          # Stop and remove the existing containers, if any
+          docker-compose down
+          
+          # Rebuild and restart containers in detached mode
+          docker-compose up --build -d
