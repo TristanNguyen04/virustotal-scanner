@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -13,8 +14,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 var (
@@ -23,16 +26,10 @@ var (
 )
 
 func main() {
-	// Load .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
-	apiKey := os.Getenv("VIRUSTOTAL_API_KEY")
-	if apiKey == "" {
-		log.Fatal("VIRUSTOTAL_API_KEY not set in .env")
-	}
+	secretName := "virustotal-scanner/api-key"
+	region := "ap-southeast-1"
+	apiKey := getSecretAPIValue(secretName, region)
 
 	// Initialize Gin router
 	r := gin.Default()
@@ -187,4 +184,31 @@ func getAnalysisResults(analysisID string, apiKey string) (map[string]interface{
 	}
 
 	return nil, fmt.Errorf("analysis timed out")
+}
+
+func getSecretAPIValue(secretName, region string) string {
+	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion(region))
+	if err != nil {
+		log.Fatalf("unable to load SDK config, %v", err)
+	}
+
+	svc := secretsmanager.NewFromConfig(cfg)
+
+	input := &secretsmanager.GetSecretValueInput{
+		SecretId:     aws.String(secretName),
+		VersionStage: aws.String("AWSCURRENT"), // Defaults to AWSCURRENT if not specified
+	}
+
+	result, err := svc.GetSecretValue(context.TODO(), input)
+	if err != nil {
+		log.Fatalf("failed to retrieve secret value: %v", err)
+	}
+
+	var secret map[string]string
+	err = json.Unmarshal([]byte(*result.SecretString), &secret)
+	if err != nil {
+		log.Fatalf("failed to unmarshal secret: %v", err)
+	}
+
+	return secret["VT_API_KEY"]
 }
