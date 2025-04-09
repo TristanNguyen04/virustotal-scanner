@@ -21,6 +21,11 @@ jobs:
         source: "."
         target: "~/virustotal-scanner"
         overwrite: true
+        exclude : |
+          .git/
+          .guthub/
+          *.md
+          .gitignore
 
     - name: SSH and deploy
       uses: appleboy/ssh-action@master
