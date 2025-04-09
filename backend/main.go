@@ -37,8 +37,9 @@ func main() {
 	// Serve static files (frontend)
 	r.Static("/", "../frontend")
 
+	api := r.Group("/api")
 	// File upload endpoint
-	r.POST("/upload", func(c *gin.Context) {
+	api.POST("/upload", func(c *gin.Context) {
 		// Get uploaded file
 		file, err := c.FormFile("file")
 		if err != nil {

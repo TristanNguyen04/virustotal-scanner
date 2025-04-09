@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('file', selectedFile);
 
         try {
-            const response = await fetch('/upload', {
+            const response = await fetch('/api/upload', {
                 method: 'POST',
                 body: formData
             });
