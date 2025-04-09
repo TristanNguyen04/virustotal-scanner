@@ -26,7 +26,6 @@ var (
 )
 
 func main() {
-
 	secretName := "virustotal-scanner/api-key"
 	region := "ap-southeast-1"
 	apiKey := getSecretAPIValue(secretName, region)
@@ -35,7 +34,7 @@ func main() {
 	r := gin.Default()
 
 	// Serve static files (frontend)
-	r.Static("/", "../frontend")
+	r.Static("/", "./frontend")
 
 	// File upload endpoint
 	r.POST("/upload", func(c *gin.Context) {
@@ -47,7 +46,7 @@ func main() {
 		}
 
 		// Save file temporarily
-		filePath := filepath.Join("../frontend/uploads", file.Filename)
+		filePath := filepath.Join("frontend/uploads", file.Filename)
 		if err := c.SaveUploadedFile(file, filePath); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to save file"})
 			return

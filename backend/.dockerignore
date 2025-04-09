@@ -1,5 +1,0 @@
-# Prevent local files from getting into the image
-*.log
-frontend/uploads/*
-*.DS_Store
-*.git
