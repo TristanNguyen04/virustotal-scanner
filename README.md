@@ -32,7 +32,7 @@ git clone <your-repository-url>
 cd virustotal-scanner
 ```
 
-### 2. Clone the repository
+### 2. Install Go dependencies
 Navigate to the `backend` directory and run the following command to install the necessary Go dependencies:
 ```bash
 cd backend
@@ -77,6 +77,7 @@ virustotal-scanner/
 └── README.md                  # This README file
 ```
 
+## Troubleshooting
 
 
 
