@@ -40,4 +40,47 @@ go mod tidy
 ```
 
 ### 3. Create `.env` file
+Create a `.env` file in the `backend` folder and add your VirusTotal API key like this:
+```text
+VIRUSTOTAL_API_KEY="your_VirusTotal_API"
+```
+
+### 4. Run the backend
+To run the backend server, use the following command:
+```bash
+go run main.go
+```
+
+This will start the server, and you should see the following message in the terminal:
+```bash
+Server running on http://localhost:8080
+```
+
+### 5. Access the web interface
+Open you browser and navigate to `http://localhost:8080`. The frontend interface will allow you to upload files and view scan results.
+
+### 6. File uploads
+You can drag and drop a file into the "Drop Zone" or browse files to upload. The server will upload the file to VirusTotal for scanning, and you will receive a detailed scan result once the analysis is complete.
+
+## Project Structure
+```
+virustotal-scanner/
+├── backend/                   # Backend (Go) logic
+│   ├── main.go                # The main Go file for the server
+│   ├── .env                   # Environment variables (for storing your API key)
+├── frontend/                  # Frontend (HTML, CSS, JS) files
+│   ├── index.html             # Main HTML interface
+│   ├── styles.css             # Styling for the UI
+│   ├── script.js              # JS for handling file uploads and API requests
+│   └── uploads/               # Folder to temporarily store uploaded files
+├── test_files/                # Folder containing test files you can upload to scan
+└── README.md                  # This README file
+```
+
+
+
+
+
+
+
 
