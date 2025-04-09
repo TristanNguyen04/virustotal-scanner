@@ -1,0 +1,14 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev  # Use Dockerfile for production
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+      - ./frontend:/app/frontend
+      - ./frontend/uploads:/app/frontend/uploads
+    environment:
+      - ENV=development
